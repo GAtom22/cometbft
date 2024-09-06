@@ -610,7 +610,7 @@ func updateState(
 			return state, fmt.Errorf("changing validator set: %w", err)
 		}
 		// Change results from this height but only applies to the next next height.
-		lastHeightValsChanged = header.Height + 1 + 1
+		lastHeightValsChanged = header.Height +1
 	}
 
 	// Update validator proposer priority and set state variables.
@@ -635,7 +635,7 @@ func updateState(
 		state.Version.Consensus.App = nextParams.Version.App
 
 		// Change results from this height but only applies to the next height.
-		lastHeightParamsChanged = header.Height + 1
+		lastHeightParamsChanged = header.Height +1
 	}
 
 	nextVersion := state.Version
@@ -650,7 +650,7 @@ func updateState(
 		LastBlockID:                      blockID,
 		LastBlockTime:                    header.Time,
 		NextValidators:                   nValSet,
-		Validators:                       state.NextValidators.Copy(),
+		Validators:                       nValSet,
 		LastValidators:                   state.Validators.Copy(),
 		LastHeightValidatorsChanged:      lastHeightValsChanged,
 		ConsensusParams:                  nextParams,
